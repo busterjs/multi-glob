@@ -70,5 +70,15 @@ buster.testCase("Buster glob", {
         g.glob(["lib/buster.js", "src/*.js"], callback);
 
         assert.calledWith(callback, { message: "Oh no" });
+    },
+
+    "ignore duplicated items from glob": function () {
+        var callback = this.spy();
+        glob.glob.withArgs("src/foo.js").yields(null, ["src/foo.js"]);
+        glob.glob.withArgs("src/*.js").yields(null, ["src/foo.js", "src/bar.js"]);
+
+        g.glob(["src/foo.js", "src/*.js"], callback);
+
+        assert.calledWith(callback, null, ["src/foo.js", "src/bar.js"]);
     }
 });

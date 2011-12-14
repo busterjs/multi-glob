@@ -19,7 +19,7 @@
     },
     "dependencies": {
         "glob": "~2.1",
-        "buster-core": ">=0.5"
+        "buster-core": ">=0.5.1"
     },
     "devDependencies": {
         "buster": "*"
