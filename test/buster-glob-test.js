@@ -7,7 +7,7 @@ var fs = require("fs");
 
 var sandbox = {
     require: function (name) {
-        return name == "buster-core" ? bc : function () {
+        return name === "buster-core" ? bc : function () {
             return glob.glob.apply(glob, arguments);
         };
     },
@@ -52,14 +52,6 @@ buster.testCase("Buster glob", {
         assert.calledWith(glob.glob, "src/buster.js");
     },
 
-    "calls glob once with each pattern": function () {
-        g.glob(["lib/buster.js", "src/buster.js"]);
-
-        assert.calledTwice(glob.glob);
-        assert.calledWith(glob.glob, "lib/buster.js");
-        assert.calledWith(glob.glob, "src/buster.js");
-    },
-
     "calls callback with results from glob": function () {
         var callback = this.spy();
         glob.glob.yields(null, ["lib/buster.js"]);
@@ -72,7 +64,8 @@ buster.testCase("Buster glob", {
     "calls callback with combnined results from glob": function () {
         var callback = this.spy();
         glob.glob.withArgs("lib/buster.js").yields(null, ["lib/buster.js"]);
-        glob.glob.withArgs("src/*.js").yields(null, ["src/buster.js", "src/stuff.js"]);
+        var files = ["src/buster.js", "src/stuff.js"];
+        glob.glob.withArgs("src/*.js").yields(null, files);
 
         g.glob(["lib/buster.js", "src/*.js"], callback);
 
@@ -83,7 +76,8 @@ buster.testCase("Buster glob", {
     "calls callback once with glob error": function () {
         var callback = this.spy();
         glob.glob.withArgs("lib/buster.js").yields({ message: "Oh no" });
-        glob.glob.withArgs("src/*.js").yields(null, ["src/buster.js", "src/stuff.js"]);
+        var files = ["src/buster.js", "src/stuff.js"];
+        glob.glob.withArgs("src/*.js").yields(null, files);
 
         g.glob(["lib/buster.js", "src/*.js"], callback);
 
@@ -93,7 +87,8 @@ buster.testCase("Buster glob", {
     "ignore duplicated items from glob": function () {
         var callback = this.spy();
         glob.glob.withArgs("src/foo.js").yields(null, ["src/foo.js"]);
-        glob.glob.withArgs("src/*.js").yields(null, ["src/foo.js", "src/bar.js"]);
+        var files = ["src/foo.js", "src/bar.js"];
+        glob.glob.withArgs("src/*.js").yields(null, files);
 
         g.glob(["src/foo.js", "src/*.js"], callback);
 
