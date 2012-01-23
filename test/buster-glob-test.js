@@ -1,10 +1,27 @@
 var buster = require("buster");
-var glob = require("glob");
-var g = require("../lib/buster-glob");
+var sinon = require("sinon");
+var bc = require("buster-core");
+var glob = { glob: sinon.stub() };
+var vm = require("vm");
+var fs = require("fs");
+
+var sandbox = {
+    require: function (name) {
+        return name == "buster-core" ? bc : function () {
+            return glob.glob.apply(glob, arguments);
+        };
+    },
+    module: {}
+};
+
+var lib = require("path").join(__dirname, "../lib/buster-glob.js");
+var code = fs.readFileSync(lib, "utf-8");
+vm.runInNewContext(code, sandbox);
+var g = sandbox.module.exports;
 
 buster.testCase("Buster glob", {
     setUp: function () {
-        this.stub(glob, "glob");
+        glob.glob = this.stub();
     },
 
     "calls glob with pattern": function () {
@@ -14,9 +31,10 @@ buster.testCase("Buster glob", {
     },
 
     "calls glob with provided flags": function () {
-        g.glob("lib/buster.js", glob.GLOB_DEFAULT);
+        var args = { silent: true };
+        g.glob("lib/buster.js", args);
 
-        assert.calledOnceWith(glob.glob, "lib/buster.js", glob.GLOB_DEFAULT);
+        assert.calledOnceWith(glob.glob, "lib/buster.js", args);
     },
 
     "does not call glob with flags when none are provided": function () {

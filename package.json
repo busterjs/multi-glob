@@ -1,6 +1,6 @@
 {
     "name": "buster-glob",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Small wrapper around the glob module that allows globbing for multiple patterns at once",
     "homepage": "http://busterjs.org/buster-glob",
     "contributors": [{
@@ -18,10 +18,11 @@
         "url": "git://gitorious.org/buster/buster-glob.git"
     },
     "dependencies": {
-        "glob": "~2.1",
+        "glob": ">=3.0",
         "buster-core": ">=0.5.1"
     },
     "devDependencies": {
-        "buster": "*"
+        "buster": "*",
+        "sinon": ">=1.3"
     }
 }
