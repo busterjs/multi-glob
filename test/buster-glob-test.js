@@ -30,18 +30,18 @@ buster.testCase("Buster glob", {
         assert.calledOnceWith(glob.glob, "lib/buster.js");
     },
 
-    "calls glob with provided flags": function () {
+    "calls glob with provided options": function () {
         var args = { silent: true };
         g.glob("lib/buster.js", args);
 
         assert.calledOnceWith(glob.glob, "lib/buster.js", args);
     },
 
-    "does not call glob with flags when none are provided": function () {
+    "calls glob with empty options when none are provided": function () {
         g.glob("lib/buster.js");
 
-        assert.equals(glob.glob.args[0].length, 2);
-        assert.isFunction(glob.glob.args[0][1]);
+        assert.equals(glob.glob.args[0].length, 3);
+        assert.isFunction(glob.glob.args[0][2]);
     },
 
     "calls glob once with each pattern": function () {
