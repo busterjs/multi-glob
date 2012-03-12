@@ -93,5 +93,18 @@ buster.testCase("Buster glob", {
         g.glob(["src/foo.js", "src/*.js"], callback);
 
         assert.calledWith(callback, null, ["src/foo.js", "src/bar.js"]);
+    },
+
+    "strict": {
+        "fails on glob that matches no patterns": function () {
+            var callback = this.spy();
+            glob.glob.withArgs("src/foo.js").yields(null, []);
+
+            g.glob(["src/foo.js"], { strict: true }, callback);
+
+            assert.match(callback.args[0][0], {
+                message: "'src/foo.js' matched no files"
+            });
+        }
     }
 });
