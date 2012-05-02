@@ -18,7 +18,7 @@
         "url": "git://gitorious.org/buster/buster-glob.git"
     },
     "dependencies": {
-        "glob": ">=3.0",
+        "glob": ">=3.1.9",
         "buster-core": ">=0.6.0"
     },
     "devDependencies": {
