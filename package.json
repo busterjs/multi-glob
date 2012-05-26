@@ -18,7 +18,7 @@
         "url": "git://gitorious.org/buster/buster-glob.git"
     },
     "scripts": {
-        "test": "buster test"
+        "test": "./node_modules/buster/bin/buster-test"
     },
     "dependencies": {
         "glob": ">=3.1.9",
