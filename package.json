@@ -1,6 +1,6 @@
 {
     "name": "buster-glob",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "description": "Small wrapper around the glob module that allows globbing for multiple patterns at once",
     "homepage": "http://busterjs.org/buster-glob",
     "contributors": [{
