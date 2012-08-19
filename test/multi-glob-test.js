@@ -1,25 +1,28 @@
 var buster = require("buster");
-var sinon = require("sinon");
-var bc = require("buster-core");
-var glob = { glob: sinon.stub() };
+var async = require("async");
+var _ = require("lodash");
+var glob = {};
 var vm = require("vm");
 var fs = require("fs");
 
 var sandbox = {
+    buster: buster,
     require: function (name) {
-        return name === "buster-core" ? bc : function () {
+        if (name === "async") { return async; }
+        if (name === "lodash") { return _; }
+        return function () {
             return glob.glob.apply(glob, arguments);
         };
     },
     module: {}
 };
 
-var lib = require("path").join(__dirname, "../lib/buster-glob.js");
+var lib = require("path").join(__dirname, "../lib/multi-glob.js");
 var code = fs.readFileSync(lib, "utf-8");
 vm.runInNewContext(code, sandbox);
 var g = sandbox.module.exports;
 
-buster.testCase("Buster glob", {
+buster.testCase("Multi-glob", {
     setUp: function () {
         glob.glob = this.stub();
     },
@@ -52,7 +55,7 @@ buster.testCase("Buster glob", {
         assert.calledWith(glob.glob, "src/buster.js");
     },
 
-    "calls callback with results from glob": function () {
+    "calls callback with result from glob": function () {
         var callback = this.spy();
         glob.glob.yields(null, ["lib/buster.js"]);
 
