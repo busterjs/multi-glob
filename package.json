@@ -27,6 +27,6 @@
         "lodash": ">=0.5"
     },
     "devDependencies": {
-        "buster": "*"
+        "buster": "0.6.11"
     }
 }
