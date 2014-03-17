@@ -5,6 +5,8 @@ var glob = {};
 var vm = require("vm");
 var fs = require("fs");
 
+var assert = buster.referee.assert;
+
 var sandbox = {
     buster: buster,
     require: function (name) {

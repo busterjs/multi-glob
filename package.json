@@ -19,7 +19,8 @@
         "url": "https://github.com/busterjs/multi-glob.git"
     },
     "scripts": {
-        "test": "node ./test/multi-glob-test.js"
+        "test": "node node_modules/buster/bin/buster-test",
+        "test-debug": "node --debug-brk node_modules/buster/bin/buster-test"
     },
     "dependencies": {
         "glob": ">=3.1.9",
@@ -27,6 +28,6 @@
         "lodash": "~1.0"
     },
     "devDependencies": {
-        "buster": "0.6.11"
+        "buster": "*"
     }
 }
