@@ -13,7 +13,7 @@ If you just need to glob multiple patterns in one go, you can simply do:
 
 ```javascript
 var glob = require("glob");
-glob("{all,the,patterns}", cb);
+glob(["all", "the", "patterns"], cb);
 ```
 
 However, with `multi-glob`, you can do a "strict" glob, which will cause an
