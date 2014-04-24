@@ -63,10 +63,10 @@ buster.testCase("Multi-glob", {
 
         g.glob("lib/buster.js", callback);
 
-        assert.calledOnceWith(callback, null, ["lib/buster.js"]);
+        assert.calledOnceWith(callback, undefined, ["lib/buster.js"]);
     },
 
-    "calls callback with combnined results from glob": function () {
+    "calls callback with combined results from glob": function () {
         var callback = this.spy();
         glob.glob.withArgs("lib/buster.js").yields(null, ["lib/buster.js"]);
         var files = ["src/buster.js", "src/stuff.js"];
@@ -74,7 +74,7 @@ buster.testCase("Multi-glob", {
 
         g.glob(["lib/buster.js", "src/*.js"], callback);
 
-        assert.calledWith(callback, null,
+        assert.calledWith(callback, undefined,
                           ["lib/buster.js", "src/buster.js", "src/stuff.js"]);
     },
 
@@ -97,7 +97,7 @@ buster.testCase("Multi-glob", {
 
         g.glob(["src/foo.js", "src/*.js"], callback);
 
-        assert.calledWith(callback, null, ["src/foo.js", "src/bar.js"]);
+        assert.calledWith(callback, undefined, ["src/foo.js", "src/bar.js"]);
     },
 
     "strict": {
