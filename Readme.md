@@ -12,7 +12,7 @@ matches no files.
 If you just need to glob multiple patterns in one go, you can simply do:
 
 ```javascript
-var glob = require("glob").glob;
+var glob = require("multi-glob").glob;
 glob(["all", "the", "patterns"], cb);
 ```
 
