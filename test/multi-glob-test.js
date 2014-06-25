@@ -100,6 +100,17 @@ buster.testCase("Multi-glob", {
         assert.calledWith(callback, undefined, ["src/foo.js", "src/bar.js"]);
     },
 
+    "Ignore patterns beggining with !": function () {
+        var callback = this.spy();
+        glob.glob.withArgs("!src/foo.js").yields(null, ["src/foo.js"]);
+        var files = ["src/foo.js", "src/bar.js"];
+        glob.glob.withArgs("src/*.js").yields(null, files);
+
+        g.glob(["src/*.js", "!src/foo.js"], callback);
+
+        assert.calledWith(callback, undefined, ["src/bar.js"]);
+    },
+
     "strict": {
         "fails on glob that matches no patterns": function () {
             var callback = this.spy();
