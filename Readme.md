@@ -4,10 +4,9 @@
 
 > Glob all the patterns!
 
-`multi-glob` is a small wrapper around `node-glob
-<https://github.com/isaacs/node-glob>`_ that allows you to glob multiple
-patterns in one go, and optionally treat it as a failure if any one pattern
-matches no files.
+`multi-glob` is a small wrapper around [node-glob](https://github.com/isaacs/node-glob)
+that allows you to glob multiple patterns in one go, and optionally treat it as a failure
+if any one pattern matches no files.
 
 If you just need to glob multiple patterns in one go, you can simply do:
 
