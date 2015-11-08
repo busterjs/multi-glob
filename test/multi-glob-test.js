@@ -57,58 +57,62 @@ buster.testCase("Multi-glob", {
         assert.calledWith(glob.glob, "src/buster.js");
     },
 
-    "calls callback with result from glob": function () {
+    "calls callback with result from glob": function (done) {
         var callback = this.spy();
         glob.glob.yields(null, ["lib/buster.js"]);
 
-        g.glob("lib/buster.js", callback);
-
-        assert.calledOnceWith(callback, undefined, ["lib/buster.js"]);
+        g.glob("lib/buster.js", function (err, res) {
+            assert.isNull(err);
+            assert.equals(res, ["lib/buster.js"]);
+            done();
+        });
     },
 
-    "calls callback with combined results from glob": function () {
-        var callback = this.spy();
+    "calls callback with combined results from glob": function (done) {
         glob.glob.withArgs("lib/buster.js").yields(null, ["lib/buster.js"]);
         var files = ["src/buster.js", "src/stuff.js"];
         glob.glob.withArgs("src/*.js").yields(null, files);
 
-        g.glob(["lib/buster.js", "src/*.js"], callback);
-
-        assert.calledWith(callback, undefined,
-                          ["lib/buster.js", "src/buster.js", "src/stuff.js"]);
+        g.glob(["lib/buster.js", "src/*.js"], function (err, res) {
+            assert.isNull(err);
+            assert.equals(res, ["lib/buster.js", "src/buster.js", "src/stuff.js"]);
+            done();
+        });
     },
 
-    "calls callback once with glob error": function () {
-        var callback = this.spy();
+    "calls callback once with glob error": function (done) {
         glob.glob.withArgs("lib/buster.js").yields({ message: "Oh no" });
         var files = ["src/buster.js", "src/stuff.js"];
         glob.glob.withArgs("src/*.js").yields(null, files);
 
-        g.glob(["lib/buster.js", "src/*.js"], callback);
-
-        assert.calledWith(callback, { message: "Oh no" });
+        g.glob(["lib/buster.js", "src/*.js"], function (err) {
+            assert.equals(err, { message: "Oh no" });
+            done();
+        });
     },
 
-    "ignore duplicated items from glob": function () {
-        var callback = this.spy();
+    "ignore duplicated items from glob": function (done) {
         glob.glob.withArgs("src/foo.js").yields(null, ["src/foo.js"]);
         var files = ["src/foo.js", "src/bar.js"];
         glob.glob.withArgs("src/*.js").yields(null, files);
 
-        g.glob(["src/foo.js", "src/*.js"], callback);
-
-        assert.calledWith(callback, undefined, ["src/foo.js", "src/bar.js"]);
+        g.glob(["src/foo.js", "src/*.js"], function (err, res) {
+            assert.isNull(err);
+            assert.equals(res, ["src/foo.js", "src/bar.js"]);
+            done();
+        });
     },
 
     "strict": {
-        "fails on glob that matches no patterns": function () {
+        "fails on glob that matches no patterns": function (done) {
             var callback = this.spy();
             glob.glob.withArgs("src/foo.js").yields(null, []);
 
-            g.glob(["src/foo.js"], { strict: true }, callback);
-
-            assert.match(callback.args[0][0], {
-                message: "'src/foo.js' matched no files"
+            g.glob(["src/foo.js"], { strict: true }, function (err) {
+                assert.match(err, {
+                    message: "'src/foo.js' matched no files"
+                });
+                done()
             });
         }
     }
