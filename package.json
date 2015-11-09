@@ -26,6 +26,9 @@
     "test": "node node_modules/buster/bin/buster-test",
     "test-debug": "node --debug-brk node_modules/buster/bin/buster-test"
   },
+  "engines": {
+    "node": ">= 4"
+  },
   "dependencies": {
     "glob": "5.x",
     "async": "1.x",
