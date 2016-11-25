@@ -30,9 +30,9 @@
     "node": ">= 4"
   },
   "dependencies": {
-    "glob": "5.x",
-    "async": "1.x",
-    "lodash": "3.x"
+    "glob": "7.x",
+    "async": "2.x",
+    "lodash": "4.x"
   },
   "devDependencies": {
     "buster": "*",
