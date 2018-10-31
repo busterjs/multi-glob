@@ -30,9 +30,11 @@
     "node": ">= 4"
   },
   "dependencies": {
-    "glob": "5.x",
     "async": "1.x",
-    "lodash": "3.x"
+    "glob": "5.x",
+    "lodash.flatten": "^4.4.0",
+    "lodash.toarray": "^4.4.0",
+    "lodash.uniq": "^4.5.0"
   },
   "devDependencies": {
     "buster": "*",
