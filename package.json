@@ -32,7 +32,7 @@
   "dependencies": {
     "glob": "5.x",
     "async": "1.x",
-    "lodash": "3.x"
+    "lodash": ">=3.x"
   },
   "devDependencies": {
     "buster": "*",
