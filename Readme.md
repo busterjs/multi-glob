@@ -1,6 +1,6 @@
 # multi-glob
 
-[![Build status](https://secure.travis-ci.org/busterjs/multi-glob.png?branch=master)](http://travis-ci.org/busterjs/multi-glob)
+[![Build status](https://secure.travis-ci.org/busterjs/multi-glob.svg?branch=master)](http://travis-ci.org/busterjs/multi-glob)
 
 > Glob all the patterns!
 
