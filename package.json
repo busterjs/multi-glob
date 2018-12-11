@@ -23,11 +23,12 @@
     "url": "https://github.com/busterjs/multi-glob.git"
   },
   "scripts": {
-    "test": "node node_modules/buster/bin/buster-test",
-    "test-debug": "node --debug-brk node_modules/buster/bin/buster-test"
+    "test": "jest",
+    "autotest": "jest --watch --verbose",
+    "test-debug": "node --debug-brk node_modules/.bin/jest"
   },
   "engines": {
-    "node": ">= 4"
+    "node": ">= 6"
   },
   "dependencies": {
     "glob": "5.x",
@@ -35,7 +36,10 @@
     "lodash": "3.x"
   },
   "devDependencies": {
-    "buster": "*",
-    "proxyquire": "1.x"
+    "@sinonjs/referee-sinon": "^4.1.0",
+    "jest": "23.6.0"
+  },
+  "jest": {
+    "testRegex": "test/*\\.js"
   }
 }
