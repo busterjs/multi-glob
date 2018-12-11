@@ -41,7 +41,6 @@ describe("Multi-glob", function () {
   });
 
   it("calls callback with result from glob", function (done) {
-    var callback = sinon.spy();
     nodeGlobStub.yields(null, ["lib/buster.js"]);
 
     multiGlob.glob("lib/buster.js", function (err, res) {

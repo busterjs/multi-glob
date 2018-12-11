@@ -31,8 +31,7 @@
     "node": ">= 6"
   },
   "dependencies": {
-    "glob": "5.x",
-    "async": "1.x"
+    "glob": "5.x"
   },
   "devDependencies": {
     "@sinonjs/referee-sinon": "^4.1.0",
